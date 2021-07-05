@@ -1,0 +1,22 @@
+<script>
+console.clear();
+const print = console.log;
+
+function isTwin(a, b) {
+    if (a.length !== b.length) {
+        return false;
+    }
+    
+    const sorteda = a.toUpperCase().split('').sort().join('');
+    const sortedb = b.toUpperCase().split('').sort().join('');
+    
+    return sorteda === sortedb;
+}
+
+print(isTwin("Hello", "world")); // false
+print(isTwin("acb", "bca")); // true
+print(isTwin("Microsoft", "Orutlook")); // false
+print(isTwin("a", "a")); // true
+print(isTwin("peon", "peon")); // true
+
+</script>
