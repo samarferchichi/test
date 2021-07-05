@@ -1,0 +1,19 @@
+Écrivez le corps de la fonction calc($array, $n1, $n2). $array est un tableau d'entiers. Les parametres $n1
+et $n2 sont des entiers definis par la relation 0 <= $n1 <= $n2 < count($array). La fonction calc doit
+retourner la somme des entiers de $array dont l'index appartient à l'intervalle [$n1; $n2].
+
+*****************************************************
+
+<?php
+
+function calc($array, $n1, $n2) {
+	
+	$sum =0;
+	foreach($array as $k=>$val){
+		if(($n1<=$k)&&($k<=$n2)){
+ 			$sum += $val;
+		}
+	}
+
+	return $sum;
+}
