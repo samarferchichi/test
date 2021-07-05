@@ -1,0 +1,53 @@
+Trouver une solution optimale pour rendre la monnaie quand une caisse automatique ne contient que
+des pièces de 2€, des billets de 5€ et de 10€
+le rendu de monnaie est exprimé par un objet Change. Cet objet a 3 propriétés : coin2, bill5 et bill10 qui
+stockent respectivement le nombre de pièces de 2€, billets de 5€ et billets de 10€.
+• Par exemple si on la machine doit rendre 6€, on devrait obtenir un objet Change avec :
+1. coin2 vaut 3 (3 pièces de 2€)
+2. bill5 vaut 0
+3. bill10 vaut 0
+l’objectif est d'implémenter la fonction optimalChange($s) qui retourne un objet Change, contenant
+
+*****************************************************************
+
+<?php
+
+class Change {
+    public $coin2 = 0;
+    public $bill5 = 0;
+    public $bill10 = 0;
+}
+  
+function optimalChange ($s){
+      
+    $change = new Change();
+	
+    if($s < 2 || $s == 3) { return NULL;}
+	
+    $change->bill10 = intval($s/10);
+    $rest10 = $s%10;
+	
+    if($rest10%2 == 1){
+        $change->bill5 = 1;
+        if($rest10 < 5){
+            $change->bill10 = ($change->bill10) - 1;
+            $change->coin2 = intval(($rest10+5)/2);
+        }elseif($rest10 >= 5 && $rest10%2 == 1){
+            $change->coin2 = intval(($rest10-5)/2);
+        }
+    }else{
+        $change->coin2 = intval($rest10/2);
+    }
+ 
+    return $change;
+}
+  
+$m = optimalChange(10);
+
+echo "2€ : " . $m->coin2 . "<br>";
+echo "5€ : " . $m->bill5 . "<br>";
+echo "10€ : " . $m->bill10 . "<br>";
+
+echo "<br>";
+
+echo "Monnaie rendue : " . ($m->coin2*2) + ($m->bill5*5) + ($m->bill10*10);
