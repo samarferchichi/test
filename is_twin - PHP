@@ -1,0 +1,24 @@
+<?php
+
+function is_twin($a, $b) {
+    if (strlen($a) !== strlen($b)) {
+        return false;
+    }
+    
+    $array_a = str_split(strtoupper($a));
+	$array_b = str_split(strtoupper($b));
+	
+	sort($array_a);
+	sort($array_b);
+	
+	$result_a = implode('', $array_a);
+	$result_b = implode('', $array_b);
+	    
+    return $result_a === $result_b;
+}
+
+echo (is_twin("Hello", "world") ? "true" : "false") . "<br>"; // false
+echo(is_twin("acb", "bca") ? "true" : "false") . "<br>"; // true
+echo(is_twin("Microsoft", "Outlook") ? "true" : "false") . "<br>"; // false
+echo(is_twin("acb", "bac") ? "true" : "false") . "<br>"; // true
+echo(is_twin("peon", "peon") ? "true" : "false") . "<br>"; // true
