@@ -1,24 +1,19 @@
-locateUniverseFormula.php
-
-********************************************
-
 <?php
 
-function locateUniverseFormula($racine, $nomfichier) {
-    $check = null;
-	$dp = opendir($racine);
-	while($entree = readdir($dp)){
-		if(is_file("$racine/$entree") &&
-		   strtolower($entree) == $nomfichier) {
-			// traitement pour le fichier trouvé 
-			$check = realpath($entree);
-		}elseif (!is_file("$racine/$entree"))// c'est un dossier! 
-		{ 
-			rechercher("$racine/$entree",$nomfichier);
+function locateUniverseFormula($dir = '/tmp/documents', $search = 'universe-formula') {
+    $files = scandir($dir);
+	unset = ($files[array_search('.', $files, true)]);
+	unset = ($files[array_search('..', $files, true)]);
+	if(count($files) < 1)
+		return;
+
+	foreach($files as $file) {
+		if(is_dir($dir.DIRECTORY_SEPARATOR.$file)) {
+			return locateUniverseFormula($dir.DIRECTORY_SEPARATOR.$file);
+		} elseif ($file == $search) {
+			return $dir.DIRECTORY_SEPARATOR.$file;
 		}
 	}
-
-    return $check;
 }
 
 echo locateUniverseFormula('/tmp/documents', 'universe-formula');
